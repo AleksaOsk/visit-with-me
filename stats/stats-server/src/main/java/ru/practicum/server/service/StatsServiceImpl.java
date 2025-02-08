@@ -1,0 +1,54 @@
+package ru.practicum.server.service;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import ru.practicum.server.StatsRepository;
+import ru.practicum.server.mapper.HitMapper;
+import ru.practicum.server.mapper.StatMapper;
+import ru.practicum.server.model.Hit;
+import ru.practicum.server.model.Stat;
+import ru.practicum.stats.dto.HitRequestDto;
+import ru.practicum.stats.dto.StatResponseDto;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Slf4j
+@Service
+@AllArgsConstructor
+public class StatsServiceImpl implements StatsService {
+    StatsRepository statsRepository;
+
+    @Override
+    public void save(HitRequestDto requestDto) {
+        log.info("Пришел запрос на сохранение записи запроса для {} от пользователя с ip {}",
+                requestDto.getUri(), requestDto.getIp());
+        Hit hit = HitMapper.mapToHit(requestDto);
+        statsRepository.save(hit);
+    }
+
+    @Override
+    public List<StatResponseDto> get(String start, String end, List<String> uris, boolean unique) {
+        LocalDateTime startTime = LocalDateTime.parse(start);
+        LocalDateTime endTime = LocalDateTime.parse(end);
+        List<Stat> list;
+        if (uris == null || uris.isEmpty()) {
+            if (unique) {
+                list = statsRepository.findAllWithoutUrisUnique(startTime, endTime);
+            } else {
+                list = statsRepository.findAllWithoutUrisNotUnique(startTime, endTime);
+            }
+        } else {
+            if (unique) {
+                list = statsRepository.findAllWithUrisUnique(startTime, endTime, uris);
+
+            } else {
+                list = statsRepository.findAllWithUrisNotUnique(startTime, endTime, uris);
+            }
+        }
+        return list.stream()
+                .map(StatMapper::mapToStatDto)
+                .toList();
+    }
+}
