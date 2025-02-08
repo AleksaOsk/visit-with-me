@@ -26,7 +26,8 @@ public class StatsServiceImpl implements StatsService {
     public void save(HitRequestDto requestDto) {
         log.info("Пришел запрос на сохранение записи запроса для {} от пользователя с ip {}",
                 requestDto.getUri(), requestDto.getIp());
-        Hit hit = HitMapper.mapToHit(requestDto);
+        LocalDateTime time = LocalDateTime.parse(requestDto.getTimestamp(), formatter);
+        Hit hit = HitMapper.mapToHit(requestDto, time);
         statsRepository.save(hit);
     }
 
