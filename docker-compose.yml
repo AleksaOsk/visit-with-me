@@ -26,3 +26,10 @@ services:
       timeout: 5s
       interval: 5s
       retries: 10
+
+      ewm-service:
+        build: ewm-service
+        image: ewm-service
+        container_name: ewm-service
+        ports:
+          - "8080:8080"
