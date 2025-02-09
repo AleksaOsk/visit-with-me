@@ -33,6 +33,7 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public List<StatResponseDto> get(String start, String end, List<String> uris, boolean unique) {
+        log.info("Пришел запрос на получение статистики за даты с {} по {}, уникальность = {}", start, end, unique);
         LocalDateTime startTime = LocalDateTime.parse(start, formatter);
         LocalDateTime endTime = LocalDateTime.parse(end, formatter);
         List<Stat> list;

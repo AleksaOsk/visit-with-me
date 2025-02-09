@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping
 @AllArgsConstructor
 public class StatisticController {
-    StatsClient statsClient;
+    private StatsClient statsClient;
 
     @PostMapping("/hits")
     public void addHit(@RequestBody HitRequestDto hitDto) {

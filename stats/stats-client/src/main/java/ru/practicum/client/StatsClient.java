@@ -11,6 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.practicum.stats.dto.HitRequestDto;
 import ru.practicum.stats.dto.StatResponseDto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Slf4j
@@ -19,6 +21,8 @@ public class StatsClient {
 
     private final RestTemplate restTemplate;
     private final String serverUrl;
+    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
 
     @Autowired
@@ -38,15 +42,12 @@ public class StatsClient {
     }
 
     public List<StatResponseDto> getStats(String start, String end, List<String> uris, boolean unique) {
-
-        if (start.contains(" ") || end.contains(" ")) {
-            start = start.replace(" ", "T");
-            end = end.replace(" ", "T");
-        }
+        LocalDateTime startTime = LocalDateTime.parse(start, inputFormatter);
+        LocalDateTime endTime = LocalDateTime.parse(end, inputFormatter);
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(serverUrl + "/stats")
-                .queryParam("start", start)
-                .queryParam("end", end);
+                .queryParam("start", startTime.format(outputFormatter))
+                .queryParam("end", endTime.format(outputFormatter));
         if (uris != null && !uris.isEmpty()) {
             builder.queryParam("uris", String.join(",", uris));
         }
