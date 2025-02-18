@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class StatResponseDto {
     private String app;
     private String uri;
-    private Long hits;
+    private long hits;
 }
