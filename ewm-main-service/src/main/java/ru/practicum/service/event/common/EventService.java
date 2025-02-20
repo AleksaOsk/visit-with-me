@@ -15,8 +15,8 @@ import java.util.Optional;
 @Slf4j
 @AllArgsConstructor
 public class EventService {
-    protected EventRepository eventRepository;
-    protected StatisticService statisticService;
+    private final EventRepository eventRepository;
+    private final StatisticService statisticService;
 
     public Event getEvent(Long id) {
         return eventRepository.findById(id)

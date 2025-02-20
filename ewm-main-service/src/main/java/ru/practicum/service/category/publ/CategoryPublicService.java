@@ -1,5 +1,6 @@
 package ru.practicum.service.category.publ;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.service.category.common.dto.CategoryResponseDto;
@@ -11,10 +12,10 @@ import java.util.List;
 
 @Service
 @Slf4j
-class CategoryPublicService extends CategoryService {
-    public CategoryPublicService(CategoryRepository categoryRepository) {
-        super(categoryRepository);
-    }
+@RequiredArgsConstructor
+class CategoryPublicService {
+    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
     public List<CategoryResponseDto> getCategories(int from, int size) {
         log.info("Пришел запрос на получение категорий с from = {}, size = {}", from, size);
@@ -26,6 +27,6 @@ class CategoryPublicService extends CategoryService {
 
     public CategoryResponseDto getCategoryDto(Long id) {
         log.info("Пришел запрос на получение категории с id = {}", id);
-        return CategoryMapper.mapToCategoryDto(getCategory(id));
+        return CategoryMapper.mapToCategoryDto(categoryService.getCategory(id));
     }
 }

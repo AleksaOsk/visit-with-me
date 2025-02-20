@@ -1,5 +1,6 @@
 package ru.practicum.service.category.admin;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.service.category.common.dto.CategoryRequestDto;
@@ -14,13 +15,11 @@ import ru.practicum.service.exception.ConflictException;
 
 @Service
 @Slf4j
-class CategoryAdminService extends CategoryService {
+@RequiredArgsConstructor
+class CategoryAdminService {
     private final EventService eventService;
-
-    public CategoryAdminService(CategoryRepository categoryRepository, EventService eventService) {
-        super(categoryRepository);
-        this.eventService = eventService;
-    }
+    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
     public CategoryResponseDto addNewCategory(CategoryRequestDto requestDto) {
         log.info("Пришел запрос на создание новой категории = '{}'", requestDto.getName());
@@ -35,7 +34,7 @@ class CategoryAdminService extends CategoryService {
     public CategoryResponseDto updateCategory(Long id, CategoryRequestDto requestDto) {
         log.info("Пришел запрос на обновление категории с id = {} и name = {}", id, requestDto.getName());
         String name = requestDto.getName();
-        Category category = getCategory(id);
+        Category category = categoryService.getCategory(id);
         if (CategoryValidator.isCorrectName(category, categoryRepository.findByNameIgnoreCase(name))) {
             category.setName(name);
             category = categoryRepository.save(category);

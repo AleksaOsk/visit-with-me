@@ -1,7 +1,7 @@
 package ru.practicum.service.compilation.admin;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.practicum.service.compilation.common.dto.CompilationRequestDto;
 import ru.practicum.service.compilation.common.dto.CompilationResponseDto;
@@ -11,22 +11,21 @@ import ru.practicum.service.compilation.common.entity.EventCompilation;
 import ru.practicum.service.compilation.common.mapper.CompilationMapper;
 import ru.practicum.service.compilation.common.repository.CompilationRepository;
 import ru.practicum.service.compilation.common.repository.EventCompilationRepository;
-import ru.practicum.service.compilation.common.service.CompilationService;
 import ru.practicum.service.event.common.EventService;
 import ru.practicum.service.event.common.dto.EventShortResponseDto;
 import ru.practicum.service.event.common.entity.Event;
+import ru.practicum.service.exception.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
-class CompilationAdminService extends CompilationService {
-    @Autowired
-    public CompilationAdminService(CompilationRepository compilationRepository, EventService eventService,
-                                   EventCompilationRepository eventCompilationRepository) {
-        super(compilationRepository, eventCompilationRepository, eventService);
-    }
+@RequiredArgsConstructor
+class CompilationAdminService {
+    private final CompilationRepository compilationRepository;
+    private final EventCompilationRepository eventCompilationRepository;
+    private final EventService eventService;
 
     public CompilationResponseDto addCompilation(CompilationRequestDto requestDto) {
         log.info("Пришел запрос от админа на создание новой подборки с title = {}", requestDto.getTitle());
@@ -72,5 +71,10 @@ class CompilationAdminService extends CompilationService {
         EventCompilation eventCompilation = new EventCompilation(
                 new EventCompilation.EventCompilationId(eventId, compilation.getId()), compilation, event);
         eventCompilationRepository.save(eventCompilation);
+    }
+
+    private Compilation getCompilation(Long id) {
+        return compilationRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Подборка с id " + id + " не найдена"));
     }
 }
