@@ -2,6 +2,8 @@ package ru.practicum.service.compilation.common.mapper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import ru.practicum.service.comment.dto.CommentCompilationResponseDto;
+import ru.practicum.service.compilation.common.dto.CompilationFullResponseDto;
 import ru.practicum.service.compilation.common.dto.CompilationRequestDto;
 import ru.practicum.service.compilation.common.dto.CompilationResponseDto;
 import ru.practicum.service.compilation.common.dto.UpdateCompilationRequestDto;
@@ -35,6 +37,17 @@ public final class CompilationMapper {
         responseDto.setTitle(compil.getTitle());
         responseDto.setPinned(compil.isPinned());
         responseDto.setEvents(events);
+        return responseDto;
+    }
+
+    public static CompilationFullResponseDto mapToCompilationDto(Compilation compil, List<EventShortResponseDto> events,
+                                                                 List<CommentCompilationResponseDto> comments) {
+        CompilationFullResponseDto responseDto = new CompilationFullResponseDto();
+        responseDto.setId(compil.getId());
+        responseDto.setTitle(compil.getTitle());
+        responseDto.setPinned(compil.isPinned());
+        responseDto.setEvents(events);
+        responseDto.setComments(comments);
         return responseDto;
     }
 }

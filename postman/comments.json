@@ -1,0 +1,1439 @@
+{
+  "info": {
+    "_postman_id": "470e903d-e74a-493b-8ff7-bf9a83ab6aaf",
+    "name": "comments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39777341"
+  },
+  "item": [
+    {
+      "name": "Добавление нового пользователя",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"User created\", () => pm.response.to.have.status(201));\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"User\",\r\n    \"email\": \"user@example.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление нового пользователя (для проверок)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"User created\", () => pm.response.to.have.status(201));\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"User test\",\r\n    \"email\": \"user-test@example.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление новой категории",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Category created\", () => pm.response.to.have.status(201));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Category\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/categories",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "admin",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление нового мероприятия",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Event created\", () => pm.response.to.have.status(201));\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"annotation\": \"аннотация к новому мероприятию\",\r\n    \"title\": \"название к новому мероприятию\",\r\n    \"description\": \"описание к новому мероприятию\",\r\n    \"eventDate\": \"2025-04-28 23:00:00\",\r\n    \"requestModeration\": true,\r\n    \"participantLimit\": 576,\r\n    \"paid\": false,\r\n    \"location\": {\r\n        \"lat\": -10.8197,\r\n        \"lon\": -94.3189\r\n    },\r\n    \"category\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/events",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "events"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария к неопубликованному мероприятию",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Validation Exception\", () => pm.response.to.have.status(404));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"текст комментария к неопубликованному мероприятию\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/events/:eventId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Публикация мероприятия админом",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Event update\", () => pm.response.to.have.status(200));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"stateAction\":\"PUBLISH_EVENT\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/events/:eventId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "admin",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария с text.lenght<1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Validation Exception\", () => pm.response.to.have.status(400));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \" \"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/events/:eventId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария с text.lenght>2000",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Validation Exception\", () => pm.response.to.have.status(400));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/events/:eventId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария с text.lenght==2000",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment created\", () => pm.response.to.have.status(201));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"dfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpi\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/events/:eventId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария к мероприятию",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment created\", () => pm.response.to.have.status(201));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"комментарий к мероприятию\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/events/:eventId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "events",
+            ":eventId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Изменение текста комментария",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment update\", () => pm.response.to.have.status(200));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"новый текст для коментария к мероприятию\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/:commentId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Изменение текста комментария не владельцем",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"exception\", () => pm.response.to.have.status(404));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"новый текст для коментария к мероприятию\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/:commentId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "2"
+            },
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получение мероприятия с комментариями",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"event\", () => pm.response.to.have.status(200));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/events/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "events",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление новой подборки",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Compilation created\", () => pm.response.to.have.status(201));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"pinned\": true,\r\n    \"title\": \"Новая прикольная подборка\",\r\n    \"events\":[\r\n        1\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/compilations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "admin",
+            "compilations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария к подборке",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment created\", () => pm.response.to.have.status(201));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"комментарий к подборке\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/compilation/:compId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "compilation",
+            ":compId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "compId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария к подборке с text.lenght<1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Validation Exception\", () => pm.response.to.have.status(400));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \" \"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/compilation/:compId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "compilation",
+            ":compId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "compId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария к подборке с text.lenght>2000",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Validation Exception\", () => pm.response.to.have.status(400));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр ыяватирочвпыеуакоьтфуеяуфкрнукецрнкыеркые фурфукернфукергнфукрофукерофу икеротиф ук53ИТ РУКЕ456РОГФЙЕ4 РОФЙ435ОФТ ИРЫЧКЕ6ОГФЕОТ ФУКЕ5Р ФУК5РН ЫВАКЕРЫЦУКЕОГКЕЦыкегкыецопра вкыеокыеокрлдываопитваои  ывортвшщкыгпртвуашщкыозгит щшукпртщхфвшыипртщхфвашкы ищяхвуышпртфвущхшркиптщхвашли щашртхфвуашщкртищхвашыл ушкпрто0хфушщвкртищвшыяхиртвы прхфуыхкхшхпртфушщкыхпрьтушлщкыхр\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/compilation/:compId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "compilation",
+            ":compId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "compId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария к подборке с text.lenght==2000",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment created\", () => pm.response.to.have.status(201));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"dfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpiosdghjuiopsfghjnioujpshnpiouejrhniopurstdfgjnbhiouhdfokgjoighjdioshjfgiohjfikohjosfikhjgikothjosohijros;ihjkmnstklbhtghjnbimokturhniotghjbnfgikohnmfkoghjmngklxhjmnfgkltghkdfjshgnkdfjgndfjk;gndfjks;bndfjksgndfjks;gndfjksghndfjkgndfjkgbndfhjkgbdfhjbgdfhjbhnidfgnhidfsujgndfisughnndfipughioghujpi\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/compilation/:compId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "compilation",
+            ":compId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "compId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Добавление комментария к подборке с text.lenght==1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment created\", () => pm.response.to.have.status(201));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"t\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/compilation/:compId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            "compilation",
+            ":compId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "compId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Изменение текста комментария к подборке",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment update\", () => pm.response.to.have.status(200));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"новый текст для коментария к подборке\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/:commentId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "commentId",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получение подборки с комментариями",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"event\", () => pm.response.to.have.status(200));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/compilations/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "compilations",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Удаление комментария к мероприятию",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment delete\", () => pm.response.to.have.status(204));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/:commentId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "commentId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Удаление комментария к подборке",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment delete\", () => pm.response.to.have.status(204));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/:commentId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "commentId",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Удаление комментария к подборке не владельцем",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверяем статус\r",
+              "pm.test(\"Comment delete\", () => pm.response.to.have.status(404));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/users/:userId/comments/:commentId",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            ":userId",
+            "comments",
+            ":commentId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "2"
+            },
+            {
+              "key": "commentId",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

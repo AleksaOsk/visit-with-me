@@ -5,6 +5,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.service.compilation.common.dto.CompilationFullResponseDto;
 import ru.practicum.service.compilation.common.dto.CompilationResponseDto;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public class CompilationPublicController {
     }
 
     @GetMapping("/{compId}")
-    public CompilationResponseDto getCompilationById(@Positive(message = "некорректное значение compId")
-                                                     @PathVariable Long compId) {
-        return publicService.getCompilationById(compId);
+    public CompilationFullResponseDto getCompilationById(@Positive(message = "некорректное значение compId")
+                                                         @PathVariable Long compId) {
+        return publicService.getCompilationDto(compId);
     }
 }

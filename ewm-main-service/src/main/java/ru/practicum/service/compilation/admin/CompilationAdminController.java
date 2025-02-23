@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.service.compilation.common.dto.CompilationFullResponseDto;
 import ru.practicum.service.compilation.common.dto.CompilationRequestDto;
 import ru.practicum.service.compilation.common.dto.CompilationResponseDto;
 import ru.practicum.service.compilation.common.dto.UpdateCompilationRequestDto;
@@ -24,9 +25,9 @@ public class CompilationAdminController {
     }
 
     @PatchMapping("/{compId}")
-    public CompilationResponseDto updateCompilation(@Positive(message = "некорректное значение compId")
-                                                    @PathVariable("compId") Long id,
-                                                    @RequestBody @Valid UpdateCompilationRequestDto requestDto) {
+    public CompilationFullResponseDto updateCompilation(@Positive(message = "некорректное значение compId")
+                                                        @PathVariable("compId") Long id,
+                                                        @RequestBody @Valid UpdateCompilationRequestDto requestDto) {
         return adminService.updateCompilation(id, requestDto);
     }
 

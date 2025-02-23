@@ -4,16 +4,15 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import ru.practicum.service.category.common.entity.Category;
 import ru.practicum.service.category.common.mapper.CategoryMapper;
-import ru.practicum.service.event.common.dto.EventRequestDto;
-import ru.practicum.service.event.common.dto.EventResponseDto;
-import ru.practicum.service.event.common.dto.EventShortResponseDto;
-import ru.practicum.service.event.common.dto.UpdateEvenRequestDto;
+import ru.practicum.service.comment.dto.CommentEventResponseDto;
+import ru.practicum.service.event.common.dto.*;
 import ru.practicum.service.event.common.entity.Event;
 import ru.practicum.service.event.common.entity.State;
 import ru.practicum.service.user.admin.UserMapper;
 import ru.practicum.service.user.admin.entity.User;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class EventMapper {
@@ -54,9 +53,26 @@ public final class EventMapper {
         return eventResponseDto;
     }
 
-    public static EventResponseDto mapToEventDto(Event event, long views) {
-        EventResponseDto eventResponseDto = mapToEventDto(event);
+    public static EventCommentsResponseDto mapToEventDto(Event event, long views,
+                                                         List<CommentEventResponseDto> comments) {
+        EventCommentsResponseDto eventResponseDto = new EventCommentsResponseDto();
+        eventResponseDto.setId(event.getId());
+        eventResponseDto.setAnnotation(event.getAnnotation());
+        eventResponseDto.setTitle(event.getTitle());
+        eventResponseDto.setConfirmedRequests(event.getConfirmedRequests());
+        eventResponseDto.setCreatedOn(event.getCreatedOn());
+        eventResponseDto.setDescription(event.getDescription());
+        eventResponseDto.setEventDate(event.getEventDate());
+        eventResponseDto.setPublishedOn(event.getPublishedOn());
+        eventResponseDto.setState(event.getState());
+        eventResponseDto.setRequestModeration(event.isRequestModeration());
+        eventResponseDto.setParticipantLimit(event.getParticipantLimit());
+        eventResponseDto.setPaid(event.isPaid());
+        eventResponseDto.setLocation(event.getLocation());
+        eventResponseDto.setInitiator(UserMapper.mapToUserShortResponseDto(event.getInitiator()));
+        eventResponseDto.setCategory(CategoryMapper.mapToCategoryDto(event.getCategory()));
         eventResponseDto.setViews(views);
+        eventResponseDto.setComments(comments);
         return eventResponseDto;
     }
 

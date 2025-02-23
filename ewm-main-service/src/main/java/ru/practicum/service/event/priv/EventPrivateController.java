@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.service.event.common.dto.EventCommentsResponseDto;
 import ru.practicum.service.event.common.dto.EventRequestDto;
 import ru.practicum.service.event.common.dto.EventResponseDto;
 import ru.practicum.service.event.common.dto.UpdateEvenRequestDto;
@@ -40,14 +41,14 @@ public class EventPrivateController {
     }
 
     @GetMapping("/{eventId}")
-    public EventResponseDto getUserEvent(
+    public EventCommentsResponseDto getUserEvent(
             @Positive(message = "некорректное значение userId") @PathVariable("userId") Long userId,
             @Positive(message = "некорректное значение eventId") @PathVariable("eventId") Long eventId) {
         return eventPrivateService.getUserEvent(userId, eventId);
     }
 
     @PatchMapping("/{eventId}")
-    public EventResponseDto updateEvent(
+    public EventCommentsResponseDto updateEvent(
             @Positive(message = "некорректное значение userId") @PathVariable("userId") Long userId,
             @Positive(message = "некорректное значение eventId") @PathVariable("eventId") Long eventId,
             @Valid @RequestBody UpdateEvenRequestDto requestDto) {

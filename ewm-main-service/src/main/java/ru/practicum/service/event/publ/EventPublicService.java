@@ -10,8 +10,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.practicum.service.comment.CommentService;
+import ru.practicum.service.comment.dto.CommentEventResponseDto;
 import ru.practicum.service.event.common.EventMapper;
 import ru.practicum.service.event.common.EventRepository;
+import ru.practicum.service.event.common.dto.EventCommentsResponseDto;
 import ru.practicum.service.event.common.dto.EventResponseDto;
 import ru.practicum.service.event.common.entity.Event;
 import ru.practicum.service.event.common.entity.State;
@@ -30,6 +33,7 @@ class EventPublicService {
     private EventRepository eventRepository;
     private EntityManager entityManager;
     private StatisticService statisticService;
+    private CommentService commentService;
 
     public List<EventResponseDto> getPublicEvents(String text, List<Long> categories, Boolean paid,
                                                   String start, String end, Boolean onlyAvailable, Sort sort, int from,
@@ -85,12 +89,13 @@ class EventPublicService {
         return eventResponseDtoList;
     }
 
-    public EventResponseDto getEventById(Long eventId, HttpServletRequest httpServletRequest) {
+    public EventCommentsResponseDto getEventById(Long eventId, HttpServletRequest httpServletRequest) {
         log.info("Пришел запрос на получение мероприятия с id = {}", eventId);
         Event event = eventRepository.findByIdAndState(eventId, State.PUBLISHED)
                 .orElseThrow(() -> new NotFoundException("Мероприятие не найдено с id = " + eventId));
         long view = statisticService.getView(event);
         statisticService.sendStat(httpServletRequest);
-        return EventMapper.mapToEventDto(event, view);
+        List<CommentEventResponseDto> comments = commentService.getComments(event);
+        return EventMapper.mapToEventDto(event, view, comments);
     }
 }
