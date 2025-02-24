@@ -6,6 +6,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.service.event.common.dto.EventCommentsResponseDto;
 import ru.practicum.service.event.common.dto.EventResponseDto;
 
 import java.util.List;
@@ -37,8 +38,8 @@ public class EventPublicController {
     }
 
     @GetMapping("/{eventId}")
-    public EventResponseDto getEventById(@Positive(message = "некорректное значение eventId")
-                                         @PathVariable Long eventId, HttpServletRequest httpServletRequest) {
+    public EventCommentsResponseDto getEventById(@Positive(message = "некорректное значение eventId")
+                                                 @PathVariable Long eventId, HttpServletRequest httpServletRequest) {
         return eventPublicService.getEventById(eventId, httpServletRequest);
     }
 }

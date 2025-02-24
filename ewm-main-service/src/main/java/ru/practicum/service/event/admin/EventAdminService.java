@@ -11,8 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.service.category.common.entity.Category;
 import ru.practicum.service.category.common.service.CategoryService;
+import ru.practicum.service.comment.CommentService;
+import ru.practicum.service.comment.dto.CommentEventResponseDto;
 import ru.practicum.service.event.common.EventMapper;
 import ru.practicum.service.event.common.EventRepository;
+import ru.practicum.service.event.common.dto.EventCommentsResponseDto;
 import ru.practicum.service.event.common.dto.EventResponseDto;
 import ru.practicum.service.event.common.dto.UpdateEvenRequestDto;
 import ru.practicum.service.event.common.entity.Event;
@@ -36,6 +39,7 @@ class EventAdminService {
     private EntityManager entityManager;
     private StatisticService statisticService;
     private CategoryService categoryService;
+    private CommentService commentService;
 
     public List<EventResponseDto> getAllEvents(List<Long> users, List<String> states, List<Long> categories,
                                                String start, String end, int from, int size) {
@@ -80,7 +84,7 @@ class EventAdminService {
         return statisticService.getViewListFullDto(eventsResult);
     }
 
-    public EventResponseDto updateEvent(Long eventId, UpdateEvenRequestDto requestDto) {
+    public EventCommentsResponseDto updateEvent(Long eventId, UpdateEvenRequestDto requestDto) {
         log.info("Пришел запрос от админа редактирование мероприятия и его статуса eventId = {}", eventId);
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ValidationException("Мероприятие не найдено с id = " + eventId));
@@ -114,6 +118,7 @@ class EventAdminService {
         event = EventMapper.updateMapToEvent(requestDto, event);
         event = eventRepository.save(event);
         long view = statisticService.getView(event);
-        return EventMapper.mapToEventDto(event, view);
+        List<CommentEventResponseDto> comments = commentService.getComments(event);
+        return EventMapper.mapToEventDto(event, view, comments);
     }
 }

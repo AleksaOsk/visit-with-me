@@ -3,6 +3,9 @@ package ru.practicum.service.compilation.admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.practicum.service.comment.CommentService;
+import ru.practicum.service.comment.dto.CommentCompilationResponseDto;
+import ru.practicum.service.compilation.common.dto.CompilationFullResponseDto;
 import ru.practicum.service.compilation.common.dto.CompilationRequestDto;
 import ru.practicum.service.compilation.common.dto.CompilationResponseDto;
 import ru.practicum.service.compilation.common.dto.UpdateCompilationRequestDto;
@@ -26,6 +29,7 @@ class CompilationAdminService {
     private final CompilationRepository compilationRepository;
     private final EventCompilationRepository eventCompilationRepository;
     private final EventService eventService;
+    private final CommentService commentService;
 
     public CompilationResponseDto addCompilation(CompilationRequestDto requestDto) {
         log.info("Пришел запрос от админа на создание новой подборки с title = {}", requestDto.getTitle());
@@ -41,7 +45,7 @@ class CompilationAdminService {
         return CompilationMapper.mapToCompilationDto(compilation, eventsList);
     }
 
-    public CompilationResponseDto updateCompilation(Long id, UpdateCompilationRequestDto requestDto) {
+    public CompilationFullResponseDto updateCompilation(Long id, UpdateCompilationRequestDto requestDto) {
         log.info("Пришел запрос от админа на редактирование подборки с id = {}", id);
         Compilation compilation = getCompilation(id);
         compilation = CompilationMapper.updateMapToCompilation(requestDto, compilation);
@@ -54,8 +58,8 @@ class CompilationAdminService {
                 }
             }
         }
-
-        return CompilationMapper.mapToCompilationDto(compilation, eventsList);
+        List<CommentCompilationResponseDto> comments = commentService.getComments(compilation);
+        return CompilationMapper.mapToCompilationDto(compilation, eventsList, comments);
     }
 
     public void deleteCompilation(Long id) {

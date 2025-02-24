@@ -5,8 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.service.category.common.entity.Category;
 import ru.practicum.service.category.common.service.CategoryService;
+import ru.practicum.service.comment.CommentService;
+import ru.practicum.service.comment.dto.CommentEventResponseDto;
 import ru.practicum.service.event.common.EventMapper;
 import ru.practicum.service.event.common.EventRepository;
+import ru.practicum.service.event.common.dto.EventCommentsResponseDto;
 import ru.practicum.service.event.common.dto.EventRequestDto;
 import ru.practicum.service.event.common.dto.EventResponseDto;
 import ru.practicum.service.event.common.dto.UpdateEvenRequestDto;
@@ -38,6 +41,7 @@ class EventPrivateService {
     private CategoryService categoryService;
     private StatisticService statisticService;
     private ParticipationRequestService participationRequestService;
+    private CommentService commentService;
 
     public EventResponseDto addNewEvent(Long userId, EventRequestDto eventRequestDto) {
         log.info("Пришел запрос на создание нового мероприятия от пользователя c id = {}", userId);
@@ -59,14 +63,15 @@ class EventPrivateService {
         return statisticService.getViewListFullDto(eventResponseDtoList);
     }
 
-    public EventResponseDto getUserEvent(Long userId, Long eventId) {
+    public EventCommentsResponseDto getUserEvent(Long userId, Long eventId) {
         log.info("Пришел запрос на получение мероприятия созданного пользователем c id = {}", userId);
         Event event = getEventByIdAndInitiatorId(userId, eventId);
         long views = statisticService.getView(event);
-        return EventMapper.mapToEventDto(event, views);
+        List<CommentEventResponseDto> comments = commentService.getComments(event);
+        return EventMapper.mapToEventDto(event, views, comments);
     }
 
-    public EventResponseDto updateEvent(Long userId, Long eventId, UpdateEvenRequestDto requestDto) {
+    public EventCommentsResponseDto updateEvent(Long userId, Long eventId, UpdateEvenRequestDto requestDto) {
         log.info("Пришел запрос на обновление мероприятия с id = {} от пользователя c id = {}", userId, eventId);
         Event event = getEventByIdAndInitiatorId(userId, eventId);
         if (requestDto.getEventDate() != null) {
@@ -89,7 +94,8 @@ class EventPrivateService {
         event = EventMapper.updateMapToEvent(requestDto, event);
         event = eventRepository.save(event);
         long views = statisticService.getView(event);
-        return EventMapper.mapToEventDto(event, views);
+        List<CommentEventResponseDto> comments = commentService.getComments(event);
+        return EventMapper.mapToEventDto(event, views, comments);
     }
 
     public List<ParticipationRequestDto> getEventRequests(Long userId, Long eventId) {

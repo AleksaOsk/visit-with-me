@@ -2,9 +2,15 @@
 
 Database ewm-service:
 
-![image](https://github.com/user-attachments/assets/9d829698-ca75-40b1-bf21-72da7e232283)
+![img.png](img.png)
 
 Database stats:
 
 ![image](https://github.com/user-attachments/assets/3127f07f-24f0-448b-8483-4179c05e9f7b)
 
+Добавлена новая функциональность comments. Благодаря ей пользователи могут добавлять комментарии к мероприятиям или
+к подборкам. Добавить комментарий можно только к опубликованному событию, а изменить или удалить комментарий может
+только его владелец. Теперь при получении определенного мероприятия или подборки будет выводиться список комментариев.
+
+
+ссылка на pull request https://github.com/AleksaOsk/java-explore-with-me/pull/4

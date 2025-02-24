@@ -6,6 +6,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.service.event.common.dto.EventCommentsResponseDto;
 import ru.practicum.service.event.common.dto.EventResponseDto;
 import ru.practicum.service.event.common.dto.UpdateEvenRequestDto;
 
@@ -32,8 +33,8 @@ public class EventAdminController {
     }
 
     @PatchMapping("/{eventId}")
-    public EventResponseDto updateEvent(@Positive(message = "некорректное значение eventId") @PathVariable Long eventId,
-                                        @Valid @RequestBody UpdateEvenRequestDto requestDto) {
+    public EventCommentsResponseDto updateEvent(@Positive(message = "некорректное значение eventId") @PathVariable Long eventId,
+                                                @Valid @RequestBody UpdateEvenRequestDto requestDto) {
         return eventAdminService.updateEvent(eventId, requestDto);
     }
 }

@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.service.event.common.dto.EventShortResponseDto;
 import ru.practicum.service.event.common.entity.Event;
+import ru.practicum.service.event.common.entity.State;
 import ru.practicum.service.event.common.statistic.StatisticService;
+import ru.practicum.service.exception.NotFoundException;
 import ru.practicum.service.exception.ValidationException;
 
 import java.util.List;
@@ -21,6 +23,11 @@ public class EventService {
     public Event getEvent(Long id) {
         return eventRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("Событие с id " + id + " не найден"));
+    }
+
+    public Event getPublishedEvent(Long id) {
+        return eventRepository.findByIdAndState(id, State.PUBLISHED)
+                .orElseThrow(() -> new NotFoundException("Событие с id " + id + " не найден или еще не опубликовано"));
     }
 
     public EventShortResponseDto getEventShortDtoWithViews(Event event) {
